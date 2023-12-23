@@ -2,7 +2,7 @@
     "logger": {
         "verbose": false
     },
-    "useCutomTraders": false,
+    "useCustomTraders": false,
     "customTraderIds": [],
     "buyRateDollar": 1,
     "buyRateEuro": 1,

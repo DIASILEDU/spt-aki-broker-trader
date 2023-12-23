@@ -97,11 +97,22 @@ export class BrokerPriceManager
     public initializeSupportedTraders(): void
     {
         // Init supported traders list with default traders, except lighthouse keeper
-        const defaultTraderIds: string[] = Object.values(Traders).filter((id: string) => id !== Traders.LIGHTHOUSEKEEPER);
+        //const defaultTraderIds: string[] = Object.values(Traders).filter((id: string) => id !== Traders.LIGHTHOUSEKEEPER);
+        const defaultTraderIds: string[] = [
+            Traders.PRAPOR,
+            Traders.THERAPIST,
+            Traders.FENCE,
+            Traders.SKIER,
+            Traders.PEACEKEEPER,
+            Traders.MECHANIC,
+            Traders.RAGMAN,
+            Traders.JAEGER
+            // No need to filter out Lighthouse Keeper here
+        ];
     
         this.supportedTraders = defaultTraderIds;
         // Pull up custom traders
-        if (modConfig.useCutomTraders)
+        if (modConfig.useCustomTraders)
         {
             // If no explicit id's specified just use any available trader from database (except LK).
             if (modConfig.customTraderIds == null || modConfig.customTraderIds.length < 1)
@@ -111,6 +122,7 @@ export class BrokerPriceManager
                     (id: string) => 
                         ![Traders.LIGHTHOUSEKEEPER, "ragfair", BrokerPriceManager.brokerTraderId, BrokerPriceManager.brokerTraderCurrencyExhangeId].includes(id)
                 );
+                console.log("No custom trader id's specified. Using all available traders.")
             }
             else 
             {
